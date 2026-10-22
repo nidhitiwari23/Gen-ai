@@ -1,0 +1,87 @@
+LINUX SYNTAX CHEAT SHEET
+============================================================
+
+1. FILE & DIRECTORY NAVIGATION
+------------------------------
+Show current directory:                           pwd
+List files:                                       ls
+List files with details and hidden files:         ls -lah /home/user/project
+List files, newest first:                         ls -lt models/
+Go to a directory:                                cd /mnt/data/datasets
+Go up one level:                                  cd ..
+Go to home directory:                             cd ~/mlops-project
+Go back to previous directory:                    cd -
+Find files by name:                               find . -name "*.pkl"
+Find files by size:                               find /data -type f -size +500M
+Find files modified recently:                     find . -mtime -1
+Show location of a command:                       which python3
+Show command, man page and source location:       whereis pip
+
+2. FILE & DIRECTORY MANAGEMENT
+------------------------------
+Create a directory:                               mkdir models
+Create nested directories:                        mkdir -p experiments/run_01/checkpoints
+Create an empty file:                             touch requirements.txt
+Copy a file:                                      cp config.yaml config_backup.yaml
+Copy a directory:                                 cp -r dataset/ /mnt/backup/dataset/
+Move a file:                                      mv results.csv reports/results_2026.csv
+Rename a file:                                    mv model_v1.pt model_v2.pt
+Delete a file:                                    rm old_log.txt
+Delete a directory with contents:                 rm -r old_folder/
+Force delete without prompts:                     rm -rf tmp_checkpoints/
+
+3. VIEWING AND EDITING FILE CONTENTS
+------------------------------------
+Display a file:                                   cat config.yaml
+Combine files into one:                           cat file1.txt file2.txt > combined.txt
+View a file page by page:                         less training.log
+Show first N lines:                               head -n 20 data.csv
+Show last N lines:                                tail -n 50 training.log
+Follow a file live:                               tail -f training.log
+Edit with nano:                                   nano train_config.yaml
+Edit with vim:                                    vim Dockerfile
+Search text in a file:                            grep "ERROR" training.log
+Search ignoring case:                             grep -i "warning" app.log
+Search a folder with line numbers:                grep -rn "learning_rate" ./src
+
+4. FILE PERMISSIONS & OWNERSHIP
+-------------------------------
+View permissions:                                 ls -l config.yaml
+Add read permission:                              chmod +r notes.txt
+Add write permission:                             chmod +w config.yaml
+Add execute permission:                           chmod +x run_training.sh
+Add permission for owner only:                    chmod u+x run_training.sh
+Add permission for group:                         chmod g+w config.yaml
+Remove permission from others:                    chmod o-w config.yaml
+Set exact permissions:                            chmod u=rw,g=r,o=r notes.txt
+Set permissions with numbers (644 = rw-r--r--):   chmod 644 config.yaml
+Set permissions with numbers (755 = rwxr-xr-x):   chmod 755 run_training.sh
+Change permissions of a folder and its contents:  chmod -R 755 scripts/
+Change file owner:                                sudo chown user model.pt
+Change owner and group:                           sudo chown user:user model.pt
+Change owner of a folder and its contents:        sudo chown -R user:user ./outputs
+Run a command as administrator:                   sudo apt update
+
+5. PROCESS & JOB MANAGEMENT
+---------------------------
+List all running processes:                       ps aux
+Find a specific process:                          ps aux | grep python
+Live process monitor:                             top
+Better live process monitor:                      htop
+Stop a process gracefully:                        kill 12345
+Force stop a process:                             kill -9 12345
+Run a command in the background:                  python train.py &
+Run in background and keep alive after logout:    nohup python train.py > train.log 2>&1 &
+List background jobs:                             jobs
+Bring a job to the foreground:                    fg %1
+Resume a job in the background:                   bg %1
+
+6. SYSTEM MONITORING & STORAGE
+------------------------------
+Show disk space:                                  df -h
+Show size of a folder:                            du -sh datasets/
+Show folder sizes sorted:                         du -h --max-depth=1 . | sort -h
+Show memory usage:                                free -h
+Show GPU status:                                  nvidia-smi
+Refresh GPU status every N seconds:               watch -n 1 nvidia-smi
+
